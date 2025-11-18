@@ -32,19 +32,27 @@ class HomeWidescreen extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
 
-        return GridView.builder(
-          padding: const EdgeInsets.all(16),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            childAspectRatio: 3 / 4,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
-          ),
-          itemCount: controller.produkList.length,
-          itemBuilder: (context, index) {
-            final produk = controller.produkList[index];
-            return ProductCard(product: produk);
+        return RefreshIndicator(
+          color: Colors.red,
+          backgroundColor: Colors.yellow,
+          onRefresh: () async {
+            await controller.fetchProducts();
           },
+
+          child: GridView.builder(
+            padding: const EdgeInsets.all(24),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4, // 4 kolom biar lebih proper di layar besar
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+              childAspectRatio: 0.70, // tampilan proporsional
+            ),
+            itemCount: controller.produkList.length,
+            itemBuilder: (context, index) {
+              final produk = controller.produkList[index];
+              return ProductCard(product: produk);
+            },
+          ),
         );
       }),
     );

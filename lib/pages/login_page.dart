@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
     if (username.isEmpty || password.isEmpty) {
       Get.snackbar(
         "Warning ⚠️",
-        "Username dan password tidak boleh kosong",
+        "Username and password cannot be empty",
         snackPosition: SnackPosition.TOP,
         margin: const EdgeInsets.all(12),
         borderRadius: 10,
@@ -55,10 +55,7 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(
-          "Login Football",
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text("Login", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.black,
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -129,7 +126,7 @@ class LoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Belum punya akun?",
+                    "Don't have an account yet?",
                     style: TextStyle(color: Colors.black87),
                   ),
                   const SizedBox(width: 6),
@@ -139,7 +136,7 @@ class LoginPage extends StatelessWidget {
                       Get.to(() => RegisterPage(), binding: RegisterBinding());
                     },
                     child: const Text(
-                      "Register disini",
+                      "Register here",
                       style: TextStyle(
                         color: Color(0xFF861C1C),
                         fontWeight: FontWeight.bold,

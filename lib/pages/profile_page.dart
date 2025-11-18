@@ -29,8 +29,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _showLogoutDialog() {
     Get.defaultDialog(
-      title: "Konfirmasi Logout",
-      middleText: "Yakin ingin keluar dari akun ini?",
+      title: "Confirm Logout",
+      middleText: "Are you sure you want to log out of this account?",
       backgroundColor: Colors.white,
       radius: 10,
       confirm: ElevatedButton(
@@ -40,19 +40,17 @@ class _ProfilePageState extends State<ProfilePage> {
             barrierDismissible: false,
           );
 
-          // Jalankan logout
           await logout();
 
-          // Pindah ke halaman login
           Get.offAllNamed('/login');
         },
         style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-        child: const Text("Ya", style: TextStyle(color: Colors.white)),
+        child: const Text("Yes", style: TextStyle(color: Colors.white)),
       ),
       cancel: ElevatedButton(
         onPressed: () => Get.back(),
         style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-        child: const Text("Tidak", style: TextStyle(color: Colors.white)),
+        child: const Text("No", style: TextStyle(color: Colors.white)),
       ),
     );
   }
@@ -114,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.yellow.shade50,
+                  color: Colors.white, // ← Putih
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: Colors.yellow.shade700, width: 1.5),
                   boxShadow: [

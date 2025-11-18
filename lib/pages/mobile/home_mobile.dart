@@ -13,6 +13,7 @@ class HomeMobile extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
 
+      // AppBar
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
@@ -27,22 +28,37 @@ class HomeMobile extends StatelessWidget {
         centerTitle: true,
       ),
 
+      // Body
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
         }
 
         if (controller.produkList.isEmpty) {
-          return const Center(child: Text("Produk tidak ditemukan"));
+          return const Center(child: Text("Product not found"));
         }
 
-        return ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: controller.produkList.length,
-          itemBuilder: (context, index) {
-            final produk = controller.produkList[index];
-            return ProductCard(product: produk);
+        return RefreshIndicator(
+          color: Colors.red,
+          backgroundColor: Colors.yellow,
+          onRefresh: () async {
+            await controller.fetchProducts();
           },
+
+          child: GridView.builder(
+            padding: const EdgeInsets.all(12),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              childAspectRatio: 0.72, // lebih pendek
+            ),
+            itemCount: controller.produkList.length,
+            itemBuilder: (context, index) {
+              final produk = controller.produkList[index];
+              return ProductCard(product: produk);
+            },
+          ),
         );
       }),
     );
